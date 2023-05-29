@@ -1,0 +1,17 @@
+{
+  "name": "@stjiris/jurisprudencia-document",
+  "version": "9.4.0",
+  "description": "Estrutura dos acórdãos",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "keywords": [],
+  "author": "Diogo Almiro",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
