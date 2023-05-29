@@ -1,3 +1,5 @@
+export const JurisprudenciaVersion = "jurisprudencia.9.4"
+
 export const JurisprudenciaDocumentProperties = {
     "Original": {
         type: 'object',

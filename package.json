@@ -1,6 +1,6 @@
 {
   "name": "@stjiris/jurisprudencia-document",
-  "version": "9.4.0",
+  "version": "9.4.1",
   "description": "Estrutura dos acórdãos",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,5 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.0.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
