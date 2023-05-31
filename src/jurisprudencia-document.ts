@@ -372,10 +372,23 @@ export const JurisprudenciaDocumentProperties = {
     }
 };
 
-export type JurisprudenciaDocument = {
-    [key in keyof typeof JurisprudenciaDocumentProperties]?: any
-};
+export type JurisprudenciaDocumentKey = keyof typeof JurisprudenciaDocumentProperties;
 
-export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey is keyof JurisprudenciaDocument{
+export type JurisprudenciaDocumentRecordKey = "Original" | "HASH"
+export type JurisprudenciaDocumentStringKey = "Número de Processo" | "ECLI" | "Data" | "Relator Nome Profissional" | "Relator Nome Completo" | "Sumário" | "Texto" | "Fonte" | "UUID" | "URL"
+export type JurisprudenciaDocumentArrayKey = Exclude<JurisprudenciaDocumentKey, JurisprudenciaDocumentRecordKey | JurisprudenciaDocumentStringKey>
+
+export type JurisprudenciaDocument = Record<JurisprudenciaDocumentKey, any>;
+
+export type PartialJurisprudenciaDocument = Partial<JurisprudenciaDocument>;
+
+export type ExactTypedJurisprudenciaDocument = 
+    Record<JurisprudenciaDocumentRecordKey, Record<string, any>> &
+    Record<JurisprudenciaDocumentStringKey, string> & 
+    Record<JurisprudenciaDocumentArrayKey, string[]>;
+
+export type PartialTypedJurisprudenciaDocument = Partial<ExactTypedJurisprudenciaDocument>;
+
+export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey is JurisprudenciaDocumentKey{
     return accessKey in JurisprudenciaDocumentProperties
-} 
+}
