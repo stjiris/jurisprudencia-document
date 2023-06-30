@@ -372,11 +372,20 @@ export const JurisprudenciaDocumentProperties = {
     }
 };
 
+const keys = Object.keys(JurisprudenciaDocumentProperties);
 export type JurisprudenciaDocumentKey = keyof typeof JurisprudenciaDocumentProperties;
+export const JurisprudenciaDocumentKeys = keys as JurisprudenciaDocumentKey[];
 
-export type JurisprudenciaDocumentRecordKey = "Original" | "HASH"
-export type JurisprudenciaDocumentStringKey = "Número de Processo" | "ECLI" | "Data" | "Relator Nome Profissional" | "Relator Nome Completo" | "Sumário" | "Texto" | "Fonte" | "UUID" | "URL"
+const records = ["Original", "HASH"] as const;
+export type JurisprudenciaDocumentRecordKey = typeof records[number];
+export const JurisprudenciaDocumentRecordKeys =  records as readonly JurisprudenciaDocumentRecordKey[];
+
+const strings = ["Número de Processo", "ECLI", "Data", "Relator Nome Profissional", "Relator Nome Completo", "Sumário", "Texto", "Fonte", "UUID", "URL"] as const;
+export type JurisprudenciaDocumentStringKey = typeof strings[number];
+export const JurisprudenciaDocumentStringKeys = strings as readonly JurisprudenciaDocumentStringKey[];
+
 export type JurisprudenciaDocumentArrayKey = Exclude<JurisprudenciaDocumentKey, JurisprudenciaDocumentRecordKey | JurisprudenciaDocumentStringKey>
+export const JurisprudenciaDocumentArrayKeys = keys.filter( k => !(records as readonly string[]).includes(k) && !(strings as readonly string[]).includes(k) ) as readonly JurisprudenciaDocumentArrayKey[];
 
 export type JurisprudenciaDocument = Record<JurisprudenciaDocumentKey, any>;
 
@@ -392,3 +401,16 @@ export type PartialTypedJurisprudenciaDocument = Partial<ExactTypedJurisprudenci
 export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey is JurisprudenciaDocumentKey{
     return accessKey in JurisprudenciaDocumentProperties
 }
+
+export function isValidJurisprudenciaDocumentRecordKey(accessKey: string): accessKey is JurisprudenciaDocumentRecordKey{
+    return isValidJurisprudenciaDocumentKey(accessKey) && (records as readonly string[]).includes(accessKey);
+}
+
+export function isValidJurisprudenciaDocumentStringKey(accessKey: string): accessKey is JurisprudenciaDocumentStringKey{
+    return isValidJurisprudenciaDocumentKey(accessKey) && (strings as readonly string[]).includes(accessKey);
+}
+
+export function isValidJurisprudenciaDocumentArrayKey(accessKey: string): accessKey is JurisprudenciaDocumentArrayKey{
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentArrayKeys as readonly string[]).includes(accessKey);
+}
+
