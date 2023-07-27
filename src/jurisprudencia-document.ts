@@ -1,363 +1,99 @@
-export const JurisprudenciaVersion = "jurisprudencia.9.4"
+export const JurisprudenciaVersion = "jurisprudencia.10.0-alpha"
+
+type NullableField<F> = F | null | undefined;
+type N<F> = NullableField<F>;
+
+export type ExactField = string;
+export type DateField = string;
+export type GenericField = {
+    Original: string,
+    Show: string,
+    Index: string[]
+};
+export type ObjectField = Record<string, string>;
+export type HASHField = {
+    "Original": string
+    "Texto": string
+    "Sumário": string
+    "Processo": string
+};
+
+export type CONTENTField = string[];
+
+const ExactFieldMapping = {
+    type: 'keyword'
+}
+
+const NormalizedFieldMapping = {
+    type: 'keyword',
+    normalizer: 'term_normalizer'   
+}
+
+const DateFieldMapping = {
+    type: 'date',
+    format: 'dd/MM/yyyy'
+}
+
+const GenericFieldMapping = {
+    properties: {
+        Original: ExactFieldMapping,
+        Show: ExactFieldMapping,
+        Index: {
+            type:"text",
+            fielddata: true,
+            fields: {
+                raw: ExactFieldMapping,
+                keyword: NormalizedFieldMapping
+            }
+        }
+    }
+}
+
+const ObjectFieldMapping = {
+    type: 'object',
+    enabled: false
+}
+
+const TextFieldMapping = {
+    type: 'text',
+    term_vector: 'with_positions_offsets_payloads'
+}
 
 export const JurisprudenciaDocumentProperties = {
-    "Original": {
-        type: 'object',
-        enabled: false
-    },
-    "Número de Processo": {
-        type: 'keyword',
-        normalizer: 'term_normalizer'
-    },
-    "ECLI": {
-        type: 'keyword'
-    },
-    "Data": {
-        type: 'date',
-        format: 'dd/MM/yyyy'
-    },
-    "Relator Nome Profissional": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: "keyword",
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Relator Nome Completo": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: "keyword",
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Descritores": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Meio Processual": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Votação - Decisão": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Votação - Vencidos": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Votação - Declarações": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Secção": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Área": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Decisão": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Decisão (textual)": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Tribunal de Recurso": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Tribunal de Recurso - Processo": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Área Temática": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Jurisprudência Estrangeira": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Jurisprudência Internacional": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Jurisprudência Nacional": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Doutrina": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Legislação Comunitária": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Legislação Estrangeira": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Legislação Nacional": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Referências Internacionais": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Indicações Eventuais": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Referência de publicação": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Jurisprudência": {
-        type: 'text',
-        fielddata: true,
-        fields: {
-            raw: {
-                type: "keyword"
-            },
-            keyword: {
-                type: 'keyword',
-                normalizer: 'term_normalizer'
-            }
-        }
-    },
-    "Sumário": {
-        type: 'text',
-        term_vector: 'with_positions_offsets_payloads'
-    },
-    "Texto": {
-        type: 'text',
-        term_vector: 'with_positions_offsets_payloads'
-    },
-    "Fonte": {
-        type: 'keyword',
-    },
-    "URL": {
-        type: 'keyword',
-    },
-    "UUID": {
-        type: 'keyword'
-    },
+    "Original": ObjectFieldMapping,
+    "Número de Processo": NormalizedFieldMapping,
+    "ECLI": ExactFieldMapping,
+    "Data": DateFieldMapping,
+    "Relator Nome Profissional": GenericFieldMapping,
+    "Relator Nome Completo": GenericFieldMapping,
+    "Descritores": GenericFieldMapping,
+    "Meio Processual": GenericFieldMapping,
+    "Votação - Decisão": GenericFieldMapping,
+    "Votação - Vencidos": GenericFieldMapping,
+    "Votação - Declarações": GenericFieldMapping,
+    "Secção": GenericFieldMapping,
+    "Área": GenericFieldMapping,
+    "Decisão": GenericFieldMapping,
+    "Decisão (textual)": GenericFieldMapping,
+    "Tribunal de Recurso": GenericFieldMapping,
+    "Tribunal de Recurso - Processo": GenericFieldMapping,
+    "Área Temática": GenericFieldMapping,
+    "Jurisprudência Estrangeira": GenericFieldMapping,
+    "Jurisprudência Internacional": GenericFieldMapping,
+    "Jurisprudência Nacional": GenericFieldMapping,
+    "Doutrina": GenericFieldMapping,
+    "Legislação Comunitária": GenericFieldMapping,
+    "Legislação Estrangeira": GenericFieldMapping,
+    "Legislação Nacional": GenericFieldMapping,
+    "Referências Internacionais": GenericFieldMapping,
+    "Indicações Eventuais": GenericFieldMapping,
+    "Referência de publicação": GenericFieldMapping,
+    "Jurisprudência": GenericFieldMapping,
+    "Sumário": TextFieldMapping,
+    "Texto": TextFieldMapping,
+    "Fonte": ExactFieldMapping,
+    "URL": ExactFieldMapping,
+    "UUID": ExactFieldMapping,
     "HASH":{
         type: "object",
         properties: {
@@ -372,45 +108,58 @@ export const JurisprudenciaDocumentProperties = {
     }
 };
 
-const keys = Object.keys(JurisprudenciaDocumentProperties);
-export type JurisprudenciaDocumentKey = keyof typeof JurisprudenciaDocumentProperties;
-export const JurisprudenciaDocumentKeys = keys as JurisprudenciaDocumentKey[];
+export const JurisprudenciaDocumentContentKeys = ["CONTENT"] as const;
+export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
+export const JurisprudenciaDocumentObjectKeys = ["Original"] as const;
+export const JurisprudenciaDocumentDateKeys = ["Data"] as const;
+export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto"] as const;
+export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID"] as const;
+export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional","Relator Nome Completo","Descritores","Meio Processual","Votação - Decisão","Votação - Vencidos","Votação - Declarações","Secção","Área","Decisão","Decisão (textual)","Tribunal de Recurso","Tribunal de Recurso - Processo","Área Temática","Jurisprudência Estrangeira","Jurisprudência Internacional","Jurisprudência Nacional","Doutrina","Legislação Comunitária","Legislação Estrangeira","Legislação Nacional","Referências Internacionais","Indicações Eventuais","Referência de publicação","Jurisprudência"] as const;
 
-const records = ["Original", "HASH"] as const;
-export type JurisprudenciaDocumentRecordKey = typeof records[number];
-export const JurisprudenciaDocumentRecordKeys =  records as readonly JurisprudenciaDocumentRecordKey[];
+export type JurisprudenciaDocumentContentKey = typeof JurisprudenciaDocumentContentKeys[number];
+export type JurisprudenciaDocumentHashKeys = typeof JurisprudenciaDocumentHashKeys[number];
+export type JurisprudenciaDocumentObjectKeys = typeof JurisprudenciaDocumentObjectKeys[number];
+export type JurisprudenciaDocumentDateKeys = typeof JurisprudenciaDocumentDateKeys[number];
+export type JurisprudenciaDocumentTextKeys = typeof JurisprudenciaDocumentTextKeys[number];
+export type JurisprudenciaDocumentExactKeys = typeof JurisprudenciaDocumentExactKeys[number];
+export type JurisprudenciaDocumentGenericKeys = typeof JurisprudenciaDocumentGenericKeys[number];
 
-const strings = ["Número de Processo", "ECLI", "Data", "Relator Nome Profissional", "Relator Nome Completo", "Sumário", "Texto", "Fonte", "UUID", "URL"] as const;
-export type JurisprudenciaDocumentStringKey = typeof strings[number];
-export const JurisprudenciaDocumentStringKeys = strings as readonly JurisprudenciaDocumentStringKey[];
-
-export type JurisprudenciaDocumentArrayKey = Exclude<JurisprudenciaDocumentKey, JurisprudenciaDocumentRecordKey | JurisprudenciaDocumentStringKey>
-export const JurisprudenciaDocumentArrayKeys = keys.filter( k => !(records as readonly string[]).includes(k) && !(strings as readonly string[]).includes(k) ) as readonly JurisprudenciaDocumentArrayKey[];
-
-export type JurisprudenciaDocument = Record<JurisprudenciaDocumentKey, any>;
+export type JurisprudenciaDocument =
+    Record<JurisprudenciaDocumentContentKey, N<CONTENTField>> &
+    Record<JurisprudenciaDocumentHashKeys, N<HASHField>> &
+    Record<JurisprudenciaDocumentObjectKeys, N<ObjectField>> &
+    Record<JurisprudenciaDocumentDateKeys, N<DateField>> &
+    Record<JurisprudenciaDocumentTextKeys, N<string>> &
+    Record<JurisprudenciaDocumentExactKeys, N<ExactField>> &
+    Record<JurisprudenciaDocumentGenericKeys, N<GenericField>>;
 
 export type PartialJurisprudenciaDocument = Partial<JurisprudenciaDocument>;
 
-export type ExactTypedJurisprudenciaDocument = 
-    Record<JurisprudenciaDocumentRecordKey, Record<string, any>> &
-    Record<JurisprudenciaDocumentStringKey, string> & 
-    Record<JurisprudenciaDocumentArrayKey, string[]>;
-
-export type PartialTypedJurisprudenciaDocument = Partial<ExactTypedJurisprudenciaDocument>;
+export type JurisprudenciaDocumentKey = keyof JurisprudenciaDocument;
+export const JurisprudenciaDocumentKeys = Object.keys(JurisprudenciaDocumentProperties) as JurisprudenciaDocumentKey[];
 
 export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey is JurisprudenciaDocumentKey{
     return accessKey in JurisprudenciaDocumentProperties
 }
 
-export function isValidJurisprudenciaDocumentRecordKey(accessKey: string): accessKey is JurisprudenciaDocumentRecordKey{
-    return isValidJurisprudenciaDocumentKey(accessKey) && (records as readonly string[]).includes(accessKey);
+export function isJurisprudenciaDocumentContentKey(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentContentKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-
-export function isValidJurisprudenciaDocumentStringKey(accessKey: string): accessKey is JurisprudenciaDocumentStringKey{
-    return isValidJurisprudenciaDocumentKey(accessKey) && (strings as readonly string[]).includes(accessKey);
+export function isJurisprudenciaDocumentHashKeys(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentHashKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-
-export function isValidJurisprudenciaDocumentArrayKey(accessKey: string): accessKey is JurisprudenciaDocumentArrayKey{
-    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentArrayKeys as readonly string[]).includes(accessKey);
+export function isJurisprudenciaDocumentObjectKeys(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentObjectKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-
+export function isJurisprudenciaDocumentDateKeys(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentDateKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
+}
+export function isJurisprudenciaDocumentTextKeys(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentTextKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
+}
+export function isJurisprudenciaDocumentExactKeys(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentExactKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
+}
+export function isJurisprudenciaDocumentGenericKeys(accessKey: string){
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentGenericKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
+}
