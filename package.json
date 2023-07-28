@@ -1,6 +1,6 @@
 {
   "name": "@stjiris/jurisprudencia-document",
-  "version": "10.0.0",
+  "version": "10.0.1",
   "description": "Estrutura dos acórdãos",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

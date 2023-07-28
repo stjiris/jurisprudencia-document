@@ -6,8 +6,8 @@ type N<F> = NullableField<F>;
 export type ExactField = string;
 export type DateField = string;
 export type GenericField = {
-    Original: string,
-    Show: string,
+    Original: string[],
+    Show: string[],
     Index: string[]
 };
 export type ObjectField = Record<string, string>;
