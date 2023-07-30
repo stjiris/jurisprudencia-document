@@ -380,7 +380,7 @@ const records = ["Original", "HASH"] as const;
 export type JurisprudenciaDocumentRecordKey = typeof records[number];
 export const JurisprudenciaDocumentRecordKeys =  records as readonly JurisprudenciaDocumentRecordKey[];
 
-const strings = ["Número de Processo", "ECLI", "Data", "Relator Nome Profissional", "Relator Nome Completo", "Sumário", "Texto", "Fonte", "UUID", "URL"] as const;
+const strings = ["Número de Processo", "Área", "Secção", "ECLI", "Data", "Relator Nome Profissional", "Relator Nome Completo", "Sumário", "Texto", "Fonte", "UUID", "URL"] as const;
 export type JurisprudenciaDocumentStringKey = typeof strings[number];
 export const JurisprudenciaDocumentStringKeys = strings as readonly JurisprudenciaDocumentStringKey[];
 
