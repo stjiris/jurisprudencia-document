@@ -1,4 +1,4 @@
-export const JurisprudenciaVersion = "jurisprudencia.11.0"
+export const JurisprudenciaVersion = "jurisprudencia.11.1"
 
 type NullableField<F> = F | null | undefined;
 type N<F> = NullableField<F>;
@@ -64,6 +64,7 @@ export const JurisprudenciaDocumentProperties = {
     "Número de Processo": NormalizedFieldMapping,
     "ECLI": ExactFieldMapping,
     "Data": DateFieldMapping,
+    "Tipo": ExactFieldMapping,
     "Relator Nome Profissional": GenericFieldMapping,
     "Relator Nome Completo": GenericFieldMapping,
     "Descritores": GenericFieldMapping,
@@ -110,7 +111,7 @@ export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
 export const JurisprudenciaDocumentObjectKeys = ["Original"] as const;
 export const JurisprudenciaDocumentDateKeys = ["Data"] as const;
 export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto"] as const;
-export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID"] as const;
+export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID","Tipo"] as const;
 export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional","Relator Nome Completo","Descritores","Meio Processual","Votação","Secção","Área","Decisão","Tribunal de Recurso","Tribunal de Recurso - Processo","Área Temática","Jurisprudência Estrangeira","Jurisprudência Internacional","Jurisprudência Nacional","Doutrina","Legislação Comunitária","Legislação Estrangeira","Legislação Nacional","Referências Internacionais","Indicações Eventuais","Referência de publicação","Jurisprudência"] as const;
 
 export type JurisprudenciaDocumentContentKey = typeof JurisprudenciaDocumentContentKeys[number];
