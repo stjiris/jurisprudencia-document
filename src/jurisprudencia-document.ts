@@ -140,24 +140,24 @@ export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey i
     return accessKey in JurisprudenciaDocumentProperties
 }
 
-export function isJurisprudenciaDocumentContentKey(accessKey: string){
+export function isJurisprudenciaDocumentContentKey(accessKey: string): accessKey is JurisprudenciaDocumentContentKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentContentKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentHashKeys(accessKey: string){
+export function isJurisprudenciaDocumentHashKeys(accessKey: string): accessKey is JurisprudenciaDocumentHashKeys {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentHashKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentObjectKeys(accessKey: string){
+export function isJurisprudenciaDocumentObjectKeys(accessKey: string): accessKey is JurisprudenciaDocumentObjectKeys {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentObjectKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentDateKeys(accessKey: string){
+export function isJurisprudenciaDocumentDateKeys(accessKey: string): accessKey is JurisprudenciaDocumentDateKeys {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentDateKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentTextKeys(accessKey: string){
+export function isJurisprudenciaDocumentTextKeys(accessKey: string): accessKey is JurisprudenciaDocumentTextKeys {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentTextKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentExactKeys(accessKey: string){
+export function isJurisprudenciaDocumentExactKeys(accessKey: string): accessKey is JurisprudenciaDocumentExactKeys {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentExactKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentGenericKeys(accessKey: string){
+export function isJurisprudenciaDocumentGenericKeys(accessKey: string): accessKey is JurisprudenciaDocumentGenericKeys {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentGenericKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
