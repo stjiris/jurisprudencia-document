@@ -1,4 +1,4 @@
-export const JurisprudenciaVersion = "jurisprudencia.11.1"
+export const JurisprudenciaVersion = "jurisprudencia.12.0"
 
 type NullableField<F> = F | null | undefined;
 type N<F> = NullableField<F>;
@@ -103,7 +103,8 @@ export const JurisprudenciaDocumentProperties = {
     },
     "CONTENT": {
         type: 'text'
-    }
+    },
+    "STATE": ExactFieldMapping
 };
 
 export const JurisprudenciaDocumentContentKeys = ["CONTENT"] as const;
@@ -111,25 +112,25 @@ export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
 export const JurisprudenciaDocumentObjectKeys = ["Original"] as const;
 export const JurisprudenciaDocumentDateKeys = ["Data"] as const;
 export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto"] as const;
-export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID","Tipo"] as const;
+export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID","Tipo","STATE"] as const;
 export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional","Relator Nome Completo","Descritores","Meio Processual","Votação","Secção","Área","Decisão","Tribunal de Recurso","Tribunal de Recurso - Processo","Área Temática","Jurisprudência Estrangeira","Jurisprudência Internacional","Jurisprudência Nacional","Doutrina","Legislação Comunitária","Legislação Estrangeira","Legislação Nacional","Referências Internacionais","Indicações Eventuais","Referência de publicação","Jurisprudência"] as const;
 
 export type JurisprudenciaDocumentContentKey = typeof JurisprudenciaDocumentContentKeys[number];
-export type JurisprudenciaDocumentHashKeys = typeof JurisprudenciaDocumentHashKeys[number];
-export type JurisprudenciaDocumentObjectKeys = typeof JurisprudenciaDocumentObjectKeys[number];
-export type JurisprudenciaDocumentDateKeys = typeof JurisprudenciaDocumentDateKeys[number];
-export type JurisprudenciaDocumentTextKeys = typeof JurisprudenciaDocumentTextKeys[number];
-export type JurisprudenciaDocumentExactKeys = typeof JurisprudenciaDocumentExactKeys[number];
-export type JurisprudenciaDocumentGenericKeys = typeof JurisprudenciaDocumentGenericKeys[number];
+export type JurisprudenciaDocumentHashKey = typeof JurisprudenciaDocumentHashKeys[number];
+export type JurisprudenciaDocumentObjectKey = typeof JurisprudenciaDocumentObjectKeys[number];
+export type JurisprudenciaDocumentDateKey = typeof JurisprudenciaDocumentDateKeys[number];
+export type JurisprudenciaDocumentTextKey = typeof JurisprudenciaDocumentTextKeys[number];
+export type JurisprudenciaDocumentExactKey = typeof JurisprudenciaDocumentExactKeys[number];
+export type JurisprudenciaDocumentGenericKey = typeof JurisprudenciaDocumentGenericKeys[number];
 
 export type JurisprudenciaDocument =
     Record<JurisprudenciaDocumentContentKey, N<CONTENTField>> &
-    Record<JurisprudenciaDocumentHashKeys, N<HASHField>> &
-    Record<JurisprudenciaDocumentObjectKeys, N<ObjectField>> &
-    Record<JurisprudenciaDocumentDateKeys, N<DateField>> &
-    Record<JurisprudenciaDocumentTextKeys, N<string>> &
-    Record<JurisprudenciaDocumentExactKeys, N<ExactField>> &
-    Record<JurisprudenciaDocumentGenericKeys, N<GenericField>>;
+    Record<JurisprudenciaDocumentHashKey, N<HASHField>> &
+    Record<JurisprudenciaDocumentObjectKey, N<ObjectField>> &
+    Record<JurisprudenciaDocumentDateKey, N<DateField>> &
+    Record<JurisprudenciaDocumentTextKey, N<string>> &
+    Record<JurisprudenciaDocumentExactKey, N<ExactField>> &
+    Record<JurisprudenciaDocumentGenericKey, N<GenericField>>;
 
 export type PartialJurisprudenciaDocument = Partial<JurisprudenciaDocument>;
 
@@ -143,21 +144,21 @@ export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey i
 export function isJurisprudenciaDocumentContentKey(accessKey: string): accessKey is JurisprudenciaDocumentContentKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentContentKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentHashKeys(accessKey: string): accessKey is JurisprudenciaDocumentHashKeys {
+export function isJurisprudenciaDocumentHashKey(accessKey: string): accessKey is JurisprudenciaDocumentHashKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentHashKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentObjectKeys(accessKey: string): accessKey is JurisprudenciaDocumentObjectKeys {
+export function isJurisprudenciaDocumentObjectKey(accessKey: string): accessKey is JurisprudenciaDocumentObjectKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentObjectKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentDateKeys(accessKey: string): accessKey is JurisprudenciaDocumentDateKeys {
+export function isJurisprudenciaDocumentDateKey(accessKey: string): accessKey is JurisprudenciaDocumentDateKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentDateKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentTextKeys(accessKey: string): accessKey is JurisprudenciaDocumentTextKeys {
+export function isJurisprudenciaDocumentTextKey(accessKey: string): accessKey is JurisprudenciaDocumentTextKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentTextKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentExactKeys(accessKey: string): accessKey is JurisprudenciaDocumentExactKeys {
+export function isJurisprudenciaDocumentExactKey(accessKey: string): accessKey is JurisprudenciaDocumentExactKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentExactKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
-export function isJurisprudenciaDocumentGenericKeys(accessKey: string): accessKey is JurisprudenciaDocumentGenericKeys {
+export function isJurisprudenciaDocumentGenericKey(accessKey: string): accessKey is JurisprudenciaDocumentGenericKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentGenericKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
