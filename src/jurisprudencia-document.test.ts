@@ -1,7 +1,8 @@
-import { isJurisprudenciaDocumentContentKey, isJurisprudenciaDocumentDateKey, isJurisprudenciaDocumentExactKey, isJurisprudenciaDocumentGenericKey, isJurisprudenciaDocumentHashKey, isJurisprudenciaDocumentObjectKey, isJurisprudenciaDocumentTextKey, isValidJurisprudenciaDocumentKey, JurisprudenciaDocumentContentKeys, JurisprudenciaDocumentDateKeys, JurisprudenciaDocumentExactKeys, JurisprudenciaDocumentGenericKeys, JurisprudenciaDocumentHashKeys, JurisprudenciaDocumentKey, JurisprudenciaDocumentKeys, JurisprudenciaDocumentObjectKeys, JurisprudenciaDocumentProperties, JurisprudenciaDocumentTextKeys } from "./jurisprudencia-document"
+import { isJurisprudenciaDocumentContentKey, isJurisprudenciaDocumentDateKey, isJurisprudenciaDocumentExactKey, isJurisprudenciaDocumentGenericKey, isJurisprudenciaDocumentHashKey, isJurisprudenciaDocumentObjectKey, isJurisprudenciaDocumentStateKey, isJurisprudenciaDocumentTextKey, isValidJurisprudenciaDocumentKey, JurisprudenciaDocumentContentKeys, JurisprudenciaDocumentDateKeys, JurisprudenciaDocumentExactKeys, JurisprudenciaDocumentGenericKeys, JurisprudenciaDocumentHashKeys, JurisprudenciaDocumentKey, JurisprudenciaDocumentKeys, JurisprudenciaDocumentObjectKeys, JurisprudenciaDocumentProperties, JurisprudenciaDocumentStateKeys, JurisprudenciaDocumentTextKeys } from "./jurisprudencia-document"
 
 describe("JurisprudenciaDocument", () => {
     const merge = (JurisprudenciaDocumentContentKeys as unknown as JurisprudenciaDocumentKey[]).concat(
+        ...JurisprudenciaDocumentStateKeys,
         ...JurisprudenciaDocumentHashKeys,
         ...JurisprudenciaDocumentObjectKeys,
         ...JurisprudenciaDocumentDateKeys,
@@ -22,9 +23,9 @@ describe("JurisprudenciaDocument", () => {
     })
 })
 
-describe("There are 8 validators", () => {
+describe("There are 9 validators", () => {
     let keys = require("./jurisprudencia-document");
-    expect(Object.keys(keys).filter(vs => vs.startsWith("is"))).toHaveLength(8)
+    expect(Object.keys(keys).filter(vs => vs.startsWith("is"))).toHaveLength(9)
     require("./jurisprudencia-document")
 })
 
@@ -35,6 +36,7 @@ describe("validators", () => {
     test("Random string", () => {
         let key = Math.random().toString()
         expect(isValidJurisprudenciaDocumentKey(key)).toBeFalsy()
+        expect(isJurisprudenciaDocumentStateKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentContentKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentHashKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentDateKey(key)).toBeFalsy()
@@ -47,6 +49,7 @@ describe("validators", () => {
     test("Key can only be of one type", () => {
         JurisprudenciaDocumentKeys.forEach((key) => {
             expect(
+                (+isJurisprudenciaDocumentStateKey(key)) +
                 (+isJurisprudenciaDocumentContentKey(key)) +
                 (+isJurisprudenciaDocumentHashKey(key)) +
                 (+isJurisprudenciaDocumentDateKey(key)) +

@@ -20,6 +20,8 @@ export type HASHField = {
 
 export type CONTENTField = string[];
 
+export type STATEField = "importação" | "preparação" | "público" | "eliminado";
+
 const ExactFieldMapping = {
     type: 'keyword'
 }
@@ -107,14 +109,18 @@ export const JurisprudenciaDocumentProperties = {
     "STATE": ExactFieldMapping
 };
 
+export const JurisprudenciaDocumentStateKeys = ["STATE"] as const;
+export const JurisprudenciaDocumentStateValues = ["importação", "preparação", "público", "eliminado"] as const;
 export const JurisprudenciaDocumentContentKeys = ["CONTENT"] as const;
 export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
 export const JurisprudenciaDocumentObjectKeys = ["Original"] as const;
 export const JurisprudenciaDocumentDateKeys = ["Data"] as const;
 export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto"] as const;
-export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID","Tipo","STATE"] as const;
+export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID","Tipo"] as const;
 export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional","Relator Nome Completo","Descritores","Meio Processual","Votação","Secção","Área","Decisão","Tribunal de Recurso","Tribunal de Recurso - Processo","Área Temática","Jurisprudência Estrangeira","Jurisprudência Internacional","Jurisprudência Nacional","Doutrina","Legislação Comunitária","Legislação Estrangeira","Legislação Nacional","Referências Internacionais","Indicações Eventuais","Referência de publicação","Jurisprudência"] as const;
 
+export type JurisprudenciaDocumentStateKey = typeof JurisprudenciaDocumentStateKeys[number];
+export type JurisprudenciaDocumentStateValue = typeof JurisprudenciaDocumentStateValues[number];
 export type JurisprudenciaDocumentContentKey = typeof JurisprudenciaDocumentContentKeys[number];
 export type JurisprudenciaDocumentHashKey = typeof JurisprudenciaDocumentHashKeys[number];
 export type JurisprudenciaDocumentObjectKey = typeof JurisprudenciaDocumentObjectKeys[number];
@@ -124,6 +130,7 @@ export type JurisprudenciaDocumentExactKey = typeof JurisprudenciaDocumentExactK
 export type JurisprudenciaDocumentGenericKey = typeof JurisprudenciaDocumentGenericKeys[number];
 
 export type JurisprudenciaDocument =
+    Record<JurisprudenciaDocumentStateKey, N<STATEField>> &
     Record<JurisprudenciaDocumentContentKey, N<CONTENTField>> &
     Record<JurisprudenciaDocumentHashKey, N<HASHField>> &
     Record<JurisprudenciaDocumentObjectKey, N<ObjectField>> &
@@ -141,6 +148,9 @@ export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey i
     return accessKey in JurisprudenciaDocumentProperties
 }
 
+export function isJurisprudenciaDocumentStateKey(accessKey: string): accessKey is JurisprudenciaDocumentStateKey {
+    return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentStateKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
+}
 export function isJurisprudenciaDocumentContentKey(accessKey: string): accessKey is JurisprudenciaDocumentContentKey {
     return isValidJurisprudenciaDocumentKey(accessKey) && (JurisprudenciaDocumentContentKeys as unknown as JurisprudenciaDocumentKey[]).includes(accessKey);
 }
