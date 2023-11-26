@@ -1,37 +1,38 @@
-import { calculateUUID } from "./hash";
+import { calculateSHA1 } from "./hash";
+import { JurisprudenciaDocument } from "./jurisprudencia-document";
 
-describe("hash is deterministic", () => {
+describe("sha1 is deterministic", () => {
     let value = Math.random().toString();
     test("random string", () => {
-        expect(calculateUUID(value)).toBe(calculateUUID(value))
-        expect(calculateUUID(value)).not.toBe(calculateUUID(""))
+        expect(calculateSHA1(value)).toBe(calculateSHA1(value))
+        expect(calculateSHA1(value)).not.toBe(calculateSHA1(""))
     })
 
     test("empty object", () => {
-        expect(calculateUUID({})).toBe(calculateUUID({}))
-        expect(calculateUUID({})).not.toBe(calculateUUID(""))
+        expect(calculateSHA1({})).toBe(calculateSHA1({}))
+        expect(calculateSHA1({})).not.toBe(calculateSHA1(""))
     })
 
     test("empty keys", () => {
-        expect(calculateUUID({}, [])).toBe(calculateUUID({}, []))
-        expect(calculateUUID({a: 1}, [])).toBe(calculateUUID({}, []))
-        expect(calculateUUID({}, [])).not.toBe(calculateUUID(""))
+        expect(calculateSHA1({}, [])).toBe(calculateSHA1({}, []))
+        expect(calculateSHA1({a: 1}, [])).toBe(calculateSHA1({}, []))
+        expect(calculateSHA1({}, [])).not.toBe(calculateSHA1(""))
     })
 
     test("same keys", () => {
-        expect(calculateUUID({a: 1}, ["a"])).toBe(calculateUUID({a: 1}, ["a"]))
-        expect(calculateUUID({a: 1}, ["a"])).not.toBe(calculateUUID({a: 2}, ["a"]))
+        expect(calculateSHA1({a: 1}, ["a"])).toBe(calculateSHA1({a: 1}, ["a"]))
+        expect(calculateSHA1({a: 1}, ["a"])).not.toBe(calculateSHA1({a: 2}, ["a"]))
     })
 
     test("multiple keys", () => {
-        expect(calculateUUID({a: 1, b: 2})).toBe(calculateUUID({b: 2, a: 1}))
-        expect(calculateUUID({a: 1, b: 2})).not.toBe(calculateUUID({a: 2, b: 1}))
+        expect(calculateSHA1({a: 1, b: 2})).toBe(calculateSHA1({b: 2, a: 1}))
+        expect(calculateSHA1({a: 1, b: 2})).not.toBe(calculateSHA1({a: 2, b: 1}))
     })
 
     test("nested keys", () => {
-        expect(calculateUUID({a: 1, b: {c: 2, d: 3}})).toBe(calculateUUID({b: {d: 3, c: 2}, a: 1}))
-        expect(calculateUUID({a: 1, b: {c: 2, d: 3}})).toBe(calculateUUID({b: {}, a: 1}))
-        expect(calculateUUID({a: 1, b: {c: 2}})).not.toBe(calculateUUID({a: 2, b: {c: 1}}))
+        expect(calculateSHA1({a: 1, b: {c: 2, d: 3}})).toBe(calculateSHA1({b: {d: 3, c: 2}, a: 1}))
+        expect(calculateSHA1({a: 1, b: {c: 2, d: 3}})).toBe(calculateSHA1({b: {}, a: 1}))
+        expect(calculateSHA1({a: 1, b: {c: 2}})).not.toBe(calculateSHA1({a: 2, b: {c: 1}}))
     })
 
     test("JSON not deterministic", () => {

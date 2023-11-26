@@ -1,8 +1,9 @@
-import { isJurisprudenciaDocumentContentKey, isJurisprudenciaDocumentDateKey, isJurisprudenciaDocumentExactKey, isJurisprudenciaDocumentGenericKey, isJurisprudenciaDocumentHashKey, isJurisprudenciaDocumentObjectKey, isJurisprudenciaDocumentStateKey, isJurisprudenciaDocumentTextKey, isValidJurisprudenciaDocumentKey, JurisprudenciaDocumentContentKeys, JurisprudenciaDocumentDateKeys, JurisprudenciaDocumentExactKeys, JurisprudenciaDocumentGenericKeys, JurisprudenciaDocumentHashKeys, JurisprudenciaDocumentKey, JurisprudenciaDocumentKeys, JurisprudenciaDocumentObjectKeys, JurisprudenciaDocumentProperties, JurisprudenciaDocumentStateKeys, JurisprudenciaDocumentTextKeys } from "./jurisprudencia-document"
+import { isJurisprudenciaDocumentContentKey, isJurisprudenciaDocumentDateKey, isJurisprudenciaDocumentEntitiesKey, isJurisprudenciaDocumentExactKey, isJurisprudenciaDocumentGenericKey, isJurisprudenciaDocumentHashKey, isJurisprudenciaDocumentObjectKey, isJurisprudenciaDocumentStateKey, isJurisprudenciaDocumentTextKey, isValidJurisprudenciaDocumentKey, JurisprudenciaDocumentContentKeys, JurisprudenciaDocumentDateKeys, JurisprudenciaDocumentEntitiesKeys, JurisprudenciaDocumentExactKeys, JurisprudenciaDocumentGenericKeys, JurisprudenciaDocumentHashKeys, JurisprudenciaDocumentKey, JurisprudenciaDocumentKeys, JurisprudenciaDocumentObjectKeys, JurisprudenciaDocumentProperties, JurisprudenciaDocumentStateKeys, JurisprudenciaDocumentTextKeys } from "./jurisprudencia-document"
 
 describe("JurisprudenciaDocument", () => {
     const merge = (JurisprudenciaDocumentContentKeys as unknown as JurisprudenciaDocumentKey[]).concat(
         ...JurisprudenciaDocumentStateKeys,
+        ...JurisprudenciaDocumentEntitiesKeys,
         ...JurisprudenciaDocumentHashKeys,
         ...JurisprudenciaDocumentObjectKeys,
         ...JurisprudenciaDocumentDateKeys,
@@ -23,9 +24,9 @@ describe("JurisprudenciaDocument", () => {
     })
 })
 
-describe("There are 9 validators", () => {
+describe("There are 10 validators", () => {
     let keys = require("./jurisprudencia-document");
-    expect(Object.keys(keys).filter(vs => vs.startsWith("is"))).toHaveLength(9)
+    expect(Object.keys(keys).filter(vs => vs.startsWith("is"))).toHaveLength(10)
     require("./jurisprudencia-document")
 })
 
@@ -37,6 +38,7 @@ describe("validators", () => {
         let key = Math.random().toString()
         expect(isValidJurisprudenciaDocumentKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentStateKey(key)).toBeFalsy()
+        expect(isJurisprudenciaDocumentEntitiesKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentContentKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentHashKey(key)).toBeFalsy()
         expect(isJurisprudenciaDocumentDateKey(key)).toBeFalsy()
@@ -50,6 +52,7 @@ describe("validators", () => {
         JurisprudenciaDocumentKeys.forEach((key) => {
             expect(
                 (+isJurisprudenciaDocumentStateKey(key)) +
+                (+isJurisprudenciaDocumentEntitiesKey(key)) +
                 (+isJurisprudenciaDocumentContentKey(key)) +
                 (+isJurisprudenciaDocumentHashKey(key)) +
                 (+isJurisprudenciaDocumentDateKey(key)) +
