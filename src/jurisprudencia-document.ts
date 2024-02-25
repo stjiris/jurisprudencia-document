@@ -20,7 +20,7 @@ export type HASHField = {
 
 export type CONTENTField = string[];
 
-export type STATEField = "importação" | "preparação" | "público" | "eliminado";
+export type STATEField = "importação" | "preparação" | "público" | "privado" | "eliminado";
 
 const ExactFieldMapping = {
     type: 'keyword'
@@ -28,7 +28,7 @@ const ExactFieldMapping = {
 
 const NormalizedFieldMapping = {
     type: 'keyword',
-    normalizer: 'term_normalizer'   
+    normalizer: 'term_normalizer'
 }
 
 const DateFieldMapping = {
@@ -41,7 +41,7 @@ const GenericFieldMapping = {
         Original: ExactFieldMapping,
         Show: ExactFieldMapping,
         Index: {
-            type:"text",
+            type: "text",
             fielddata: true,
             fields: {
                 raw: ExactFieldMapping,
@@ -94,30 +94,30 @@ export const JurisprudenciaDocumentProperties = {
     "Fonte": ExactFieldMapping,
     "URL": ExactFieldMapping,
     "UUID": ExactFieldMapping,
-    "HASH":{
+    "HASH": {
         type: "object",
         properties: {
             "Original": { type: "keyword" },
             "Texto": { type: "keyword" },
-            "Sumário" : { type: "keyword" },
-            "Processo" : { type: "keyword" }
+            "Sumário": { type: "keyword" },
+            "Processo": { type: "keyword" }
         }
     },
     "CONTENT": {
         type: 'text'
     },
-    "STATE": ExactFieldMapping
+    "STATE": ExactFieldMapping,
 };
 
 export const JurisprudenciaDocumentStateKeys = ["STATE"] as const;
-export const JurisprudenciaDocumentStateValues = ["importação", "preparação", "público", "eliminado"] as const;
+export const JurisprudenciaDocumentStateValues = ["importação", "preparação", "público", "privado", "eliminado"] as const;
 export const JurisprudenciaDocumentContentKeys = ["CONTENT"] as const;
 export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
 export const JurisprudenciaDocumentObjectKeys = ["Original"] as const;
 export const JurisprudenciaDocumentDateKeys = ["Data"] as const;
 export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto"] as const;
-export const JurisprudenciaDocumentExactKeys = ["Número de Processo","ECLI","Fonte","URL","UUID","Tipo"] as const;
-export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional","Relator Nome Completo","Descritores","Meio Processual","Votação","Secção","Área","Decisão","Tribunal de Recurso","Tribunal de Recurso - Processo","Área Temática","Jurisprudência Estrangeira","Jurisprudência Internacional","Jurisprudência Nacional","Doutrina","Legislação Comunitária","Legislação Estrangeira","Legislação Nacional","Referências Internacionais","Indicações Eventuais","Referência de publicação","Jurisprudência"] as const;
+export const JurisprudenciaDocumentExactKeys = ["Número de Processo", "ECLI", "Fonte", "URL", "UUID", "Tipo"] as const;
+export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional", "Relator Nome Completo", "Descritores", "Meio Processual", "Votação", "Secção", "Área", "Decisão", "Tribunal de Recurso", "Tribunal de Recurso - Processo", "Área Temática", "Jurisprudência Estrangeira", "Jurisprudência Internacional", "Jurisprudência Nacional", "Doutrina", "Legislação Comunitária", "Legislação Estrangeira", "Legislação Nacional", "Referências Internacionais", "Indicações Eventuais", "Referência de publicação", "Jurisprudência"] as const;
 
 export type JurisprudenciaDocumentStateKey = typeof JurisprudenciaDocumentStateKeys[number];
 export type JurisprudenciaDocumentStateValue = typeof JurisprudenciaDocumentStateValues[number];
@@ -144,7 +144,7 @@ export type PartialJurisprudenciaDocument = Partial<JurisprudenciaDocument>;
 export type JurisprudenciaDocumentKey = keyof JurisprudenciaDocument;
 export const JurisprudenciaDocumentKeys = Object.keys(JurisprudenciaDocumentProperties) as JurisprudenciaDocumentKey[];
 
-export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey is JurisprudenciaDocumentKey{
+export function isValidJurisprudenciaDocumentKey(accessKey: string): accessKey is JurisprudenciaDocumentKey {
     return accessKey in JurisprudenciaDocumentProperties
 }
 

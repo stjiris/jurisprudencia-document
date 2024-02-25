@@ -23,7 +23,7 @@ describe("JurisprudenciaDocument", () => {
     })
 })
 
-describe("There are 9 validators", () => {
+describe("There are 10 validators", () => {
     let keys = require("./jurisprudencia-document");
     expect(Object.keys(keys).filter(vs => vs.startsWith("is"))).toHaveLength(9)
     require("./jurisprudencia-document")
