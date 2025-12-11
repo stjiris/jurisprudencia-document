@@ -1,5 +1,5 @@
 {
-  "name": "@mdgf11/jurisprudencia-document",
+  "name": "@mig/jurisprudencia-document",
   "version": "13.0.1",
   "description": "Estrutura dos acórdãos",
   "main": "dist/index.js",
