@@ -109,11 +109,10 @@ export const JurisprudenciaDocumentProperties = {
         type: 'text'
     },
     "STATE": ExactFieldMapping,
+    "PATH": ExactFieldMapping,
     "ENTITIES": {
         type: "flattened",
-        enabled: true
     },
-    "PATH": ExactFieldMapping,
 };
 
 export const JurisprudenciaDocumentStateKeys = ["STATE"] as const;
