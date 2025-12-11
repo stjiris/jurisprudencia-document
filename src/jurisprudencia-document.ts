@@ -116,7 +116,7 @@ export const JurisprudenciaDocumentProperties = {
 };
 
 export const JurisprudenciaDocumentStateKeys = ["STATE"] as const;
-export const JurisprudenciaDocumentStateValues = ["importação", "preparação", "público", "eliminado"] as const;
+export const JurisprudenciaDocumentStateValues = ["importação", "preparação", "público", "eliminado", "privado"] as const;
 export const JurisprudenciaDocumentEntitiesKeys = ["ENTITIES"] as const;
 export const JurisprudenciaDocumentContentKeys = ["CONTENT"] as const;
 export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
