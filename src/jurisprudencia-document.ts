@@ -20,7 +20,7 @@ export type HASHField = {
 
 export type CONTENTField = string[];
 
-export type STATEField = "importação" | "preparação" | "público" | "eliminado";
+export type STATEField = "importação" | "preparação" | "público" | "eliminado" | "privado";
 
 export type ENTITIESField = Record<string, string[]>;
 
