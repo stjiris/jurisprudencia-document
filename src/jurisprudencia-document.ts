@@ -13,9 +13,9 @@ export type GenericField = {
 export type ObjectField = Record<string, string>;
 export type HASHField = {
     "Original": string
-    "Texto": string
-    "Sumário": string
     "Processo": string
+    "Data": string
+    "Meio Processual": string
 };
 
 export type CONTENTField = string[];

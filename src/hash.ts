@@ -9,15 +9,15 @@ export function calculateSHA1(obj: any, keys?: string[]): string {
     return createHash("sha1").update(str).digest("base64url")
 }
 
-export function calculateHASH(doc: Pick<JurisprudenciaDocument, "Original" | "Número de Processo" | "Sumário" | "Texto">): HASHField {
+export function calculateHASH(doc: Pick<JurisprudenciaDocument, "Original" | "Número de Processo" | "Data" | "Meio Processual">): HASHField {
     return {
         Original: calculateSHA1(doc.Original),
         Processo: calculateSHA1(doc["Número de Processo"] || ""),
-        Sumário: calculateSHA1(doc.Sumário || ""),
-        Texto: calculateSHA1(doc.Texto || "")
+        Data: calculateSHA1(doc.Data || ""),
+        "Meio Processual": calculateSHA1(doc["Meio Processual"] || "")
     }
 }
 
 export function calculateUUID(hash: HASHField): string {
-    return calculateSHA1(hash, ["Sumário", "Texto", "Processo"])
+    return calculateSHA1(hash, ["Processo", "Data", "Meio Processual"])
 }
