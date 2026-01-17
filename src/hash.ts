@@ -14,7 +14,7 @@ export function calculateHASH(doc: Pick<JurisprudenciaDocument, "Original" | "NÃ
         Original: calculateSHA1(doc.Original),
         Processo: calculateSHA1(doc["NÃºmero de Processo"] || ""),
         Data: calculateSHA1(doc.Data || ""),
-        "Meio Processual": calculateSHA1(doc["Meio Processual"] || "")
+        "Meio Processual": calculateSHA1(doc["Meio Processual"]?.Original || "")
     }
 }
 
