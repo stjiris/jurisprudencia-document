@@ -100,9 +100,9 @@ export const JurisprudenciaDocumentProperties = {
         type: "object",
         properties: {
             "Original": { type: "keyword" },
-            "Texto": { type: "keyword" },
-            "Sumário": { type: "keyword" },
-            "Processo": { type: "keyword" }
+            "Processo": { type: "keyword" },
+            "Data": { type: "keyword" },
+            "Meio Processual": { type: "keyword" }
         }
     },
     "CONTENT": {
