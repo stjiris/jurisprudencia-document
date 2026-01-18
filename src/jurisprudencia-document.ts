@@ -16,6 +16,8 @@ export type HASHField = {
     "Processo": string
     "Data": string
     "Meio Processual": string
+    "Texto": string
+    "Sumário": string
 };
 
 export type CONTENTField = string[];
@@ -102,7 +104,9 @@ export const JurisprudenciaDocumentProperties = {
             "Original": { type: "keyword" },
             "Processo": { type: "keyword" },
             "Data": { type: "keyword" },
-            "Meio Processual": { type: "keyword" }
+            "Meio Processual": { type: "keyword" },
+            "Texto": { type: "keyword" },
+            "Sumário": { type: "keyword" }
         }
     },
     "CONTENT": {
