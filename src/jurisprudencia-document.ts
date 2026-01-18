@@ -18,11 +18,12 @@ export type HASHField = {
     "Meio Processual": string
     "Texto": string
     "Sumário": string
+    "STATE": string
 };
 
 export type CONTENTField = string[];
 
-export type STATEField = "importação" | "preparação" | "público" | "eliminado" | "privado";
+export type STATEField = "eliminado" | "importação" | "preparação" | "privado" | "público";
 
 export type ENTITIESField = Record<string, string[]>;
 
@@ -106,7 +107,8 @@ export const JurisprudenciaDocumentProperties = {
             "Data": { type: "keyword" },
             "Meio Processual": { type: "keyword" },
             "Texto": { type: "keyword" },
-            "Sumário": { type: "keyword" }
+            "Sumário": { type: "keyword" },
+            "STATE": { type: "keyword" }
         }
     },
     "CONTENT": {
