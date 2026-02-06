@@ -17,8 +17,9 @@ export type HASHField = {
     "Data": string
     "Meio Processual": string
     "Texto": string
+    "Texto Não Anonimizado": string
     "Sumário": string
-    "STATE": string
+    "Sumário Não Anonimizado": string
 };
 
 export type CONTENTField = string[];
@@ -96,6 +97,8 @@ export const JurisprudenciaDocumentProperties = {
     "Jurisprudência": GenericFieldMapping,
     "Sumário": TextFieldMapping,
     "Texto": TextFieldMapping,
+    "Sumário Não Anonimizado": TextFieldMapping,
+    "Texto Não Anonimizado": TextFieldMapping,
     "Fonte": ExactFieldMapping,
     "URL": ExactFieldMapping,
     "UUID": ExactFieldMapping,
@@ -107,8 +110,9 @@ export const JurisprudenciaDocumentProperties = {
             "Data": { type: "keyword" },
             "Meio Processual": { type: "keyword" },
             "Texto": { type: "keyword" },
+            "Texto Não Anonimizado": { type: "keyword" },
             "Sumário": { type: "keyword" },
-            "STATE": { type: "keyword" }
+            "Sumário Não Anonimizado": { type: "keyword" },
         }
     },
     "CONTENT": {
@@ -127,7 +131,7 @@ export const JurisprudenciaDocumentContentKeys = ["CONTENT"] as const;
 export const JurisprudenciaDocumentHashKeys = ["HASH"] as const;
 export const JurisprudenciaDocumentObjectKeys = ["Original"] as const;
 export const JurisprudenciaDocumentDateKeys = ["Data"] as const;
-export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto"] as const;
+export const JurisprudenciaDocumentTextKeys = ["Sumário", "Texto", "Sumário Não Anonimizado", "Texto Não Anonimizado"] as const;
 export const JurisprudenciaDocumentExactKeys = ["Número de Processo", "ECLI", "Fonte", "URL", "UUID", "Tipo"] as const;
 export const JurisprudenciaDocumentGenericKeys = ["Relator Nome Profissional", "Relator Nome Completo", "Descritores", "Meio Processual", "Votação", "Secção", "Área", "Decisão", "Tribunal de Recurso", "Tribunal de Recurso - Processo", "Área Temática", "Jurisprudência Estrangeira", "Jurisprudência Internacional", "Jurisprudência Nacional", "Doutrina", "Legislação Comunitária", "Legislação Estrangeira", "Legislação Nacional", "Referências Internacionais", "Indicações Eventuais", "Referência de publicação", "Jurisprudência"] as const;
 
