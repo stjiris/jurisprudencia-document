@@ -1,6 +1,6 @@
 {
   "name": "@vascofelix/jurisprudencia-document",
-  "version": "14.0.0",
+  "version": "13.3.0",
   "description": "Estrutura dos acórdãos",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
